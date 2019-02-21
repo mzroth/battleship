@@ -2,10 +2,12 @@ import java.util.Arrays;
 
 public class Board {
 
+    //Creation of the enum for use in Board objects
     enum CellType {
         HIT, MISS, WATER, SHIP;
     }
 
+    //Creation of the Cell class that contains row and col integers for referencing specific tiles
     public class Cell {
         private Integer row;
         private Integer col;
@@ -24,10 +26,13 @@ public class Board {
         }
     }
 
+    // Board constructor
+    //TODO: maybe integrate the createBoard() function into the constructor so it doesn't have to be called.
     public Board() {
 
     }
 
+    //creates a board 2D array
     public CellType[][] createBoard() {
         CellType[][] board = new CellType[10][10];
         for (int i = 0; i < 10; i++) {
@@ -38,17 +43,19 @@ public class Board {
         return board;
     }
 
+    //Checks the CellType of a specific cell
     public CellType checkType(CellType[][] board, Cell cell) {
         CellType type = board[cell.getRow()][cell.getCol()];
         return type;
     }
 
-
+    //Changes a cell type in the advent of a turn
     public CellType[][] changeCell(CellType[][] board, CellType type, Cell cell) {
         board[cell.getRow()][cell.getCol()] = type;
         return board;
     }
 
+    //Checks to see if there is a SHIP still on the board
     public Boolean checkShip(CellType[][] board) {
         Boolean ship = false;
         outer: for (int i = 0; i < 10; i++) {
@@ -62,8 +69,12 @@ public class Board {
         return ship;
     }
 
+    //Used for printing a board for the player's to see. Incorporates a grid system to refer to cells with.
+    //TODO: eventually I want to improve the board UI
     public void printBoard(CellType[][] board) {
-        String[] columnNames = new String[] {" ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
+        String columnNames = "    A  B  C  D  E  F  G  H  I  J";
+        //removed for appearance not sure if it is functionally better to do it like this though
+        //String[] columnNames = new String[] {" ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
         String[] rowNums = new String[] {" 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 ", "10 "};
         String[][] boardForPrint = new String[10][10];
         for (int i = 0; i < 10; i++) {
@@ -79,7 +90,7 @@ public class Board {
                 }
             }
         }
-        System.out.println(Arrays.toString(columnNames));
+        System.out.println(columnNames);
         for (int i = 0; i < 10; i++) {
             System.out.println(rowNums[i] + Arrays.toString(boardForPrint[i]));
         }
