@@ -57,12 +57,9 @@ public class Board {
                     ship = true;
                     break outer;
                 }
-
             }
-
         }
         return ship;
-
     }
 
     public void printBoard(CellType[][] board) {
@@ -87,5 +84,4 @@ public class Board {
             System.out.println(rowNums[i] + Arrays.toString(boardForPrint[i]));
         }
     }
-
 }
