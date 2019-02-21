@@ -20,6 +20,11 @@ public class Board {
         return board;
     }
 
+    public CellType[][] changeCell(CellType[][] board, CellType cell, Integer row, Integer col) {
+        board[row][col] = cell;
+        return board;
+    }
+
     public void printBoard(CellType[][] board) {
         String[][] boardForPrint = new String[10][10];
         for (int i = 0; i < 10; i++) {
