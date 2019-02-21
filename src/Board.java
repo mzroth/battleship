@@ -8,6 +8,7 @@ public class Board {
     }
 
     //Creation of the Cell class that contains row and col integers for referencing specific tiles
+    //TODO: make this it's own class and update the board to be a 2D array of cells.
     public class Cell {
         private Integer row;
         private Integer col;
@@ -57,16 +58,14 @@ public class Board {
 
     //Checks to see if there is a SHIP still on the board
     public Boolean checkShip(CellType[][] board) {
-        Boolean ship = false;
-        outer: for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 if (board[i][j] == CellType.SHIP) {
-                    ship = true;
-                    break outer;
+                    return true;
                 }
             }
         }
-        return ship;
+        return false;
     }
 
     //Used for printing a board for the player's to see. Incorporates a grid system to refer to cells with.
