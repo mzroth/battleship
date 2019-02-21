@@ -10,5 +10,8 @@ public class Main {
         System.out.println(test.checkType(board, cell));
         System.out.println(test.checkShip(board));
 
+        Player player1 = new Player("Mark");
+        System.out.println(player1.getName());
+
     }
 }

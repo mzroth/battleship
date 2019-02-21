@@ -1,12 +1,16 @@
 public class Player {
 
-    private Board.CellType[][] playersBoard;
-    private Board.CellType[][] opponentsBoard;
+    private String name;
+    //private Board player;
+    //private Board opponent;
+    //private Board.CellType[][] playersBoard;
+    //private Board.CellType[][] opponentsBoard;
 
-    public Player() {
-
-
+    public Player(String name) {
+        this.name = name;
     }
 
-
+    public String getName() {
+        return name;
+    }
 }
