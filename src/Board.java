@@ -24,10 +24,10 @@ public class Board {
     }
 
     //Checks to see if there is a SHIP still on the board
-    public Boolean checkShip(Cell[][] cells) {
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                if (cells[i][j].getType() == CellType.SHIP) {
+    public Boolean checkShip() {
+        for (Cell[] cellRow : cells) {
+            for (Cell cell : cellRow) {
+                if (cell.getType() == CellType.SHIP) {
                     return true;
                 }
             }
@@ -37,22 +37,24 @@ public class Board {
 
     //Used for printing a board for the player's to see. Incorporates a grid system to refer to cells with.
     //TODO: eventually I want to improve the board UI
-    public void printBoard(Cell[][] cells) {
+    public void printBoard() {
         String columnNames = "    A  B  C  D  E  F  G  H  I  J";
         //removed for appearance not sure if it is functionally better to do it like this though
         //String[] columnNames = new String[] {" ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
         String[] rowNums = new String[] {" 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 ", "10 "};
-        String[][] boardForPrint = new String[10][10];
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                if (cells[i][j].getType() == CellType.WATER) {
-                    boardForPrint[i][j] = "W";
-                } else if (cells[i][j].getType() == CellType.HIT) {
-                    boardForPrint[i][j] = "H";
-                } else if (cells[i][j].getType() == CellType.MISS) {
-                    boardForPrint[i][j] = "M";
-                } else {
-                    boardForPrint[i][j] = "S";
+        String[][] boardForPrint = new String[cells.length][cells[0].length];
+        for (Cell[] cellRow : cells) {
+            for (Cell cell: cellRow) {
+                CellType type = cell.getType();
+                switch (type) {
+                    case SHIP: boardForPrint[cell.getRow()][cell.getCol()] = "S";
+                        break;
+                    case MISS: boardForPrint[cell.getRow()][cell.getCol()] = "M";
+                        break;
+                    case HIT: boardForPrint[cell.getRow()][cell.getCol()] = "H";
+                        break;
+                    default: boardForPrint[cell.getRow()][cell.getCol()] = "W";
+                        break;
                 }
             }
         }

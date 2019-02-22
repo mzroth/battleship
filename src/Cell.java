@@ -12,10 +12,6 @@ public class Cell {
     }
 
     //Getters and Setters
-    public void setRow(Integer row) { this.row = row; }
-
-    public void setCol(Integer col) { this.col = col; }
-
     public void setType(CellType type) { this.type = type; }
 
     public Integer getRow() { return row; }
