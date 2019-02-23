@@ -1,66 +1,34 @@
 import java.util.Arrays;
 
 public class Board {
-
-    //Creation of the enum for use in Board objects
-    enum CellType {
-        HIT, MISS, WATER, SHIP;
-    }
-
-    //Creation of the Cell class that contains row and col integers for referencing specific tiles
-    //TODO: make this it's own class and update the board to be a 2D array of cells.
-    public class Cell {
-        private Integer row;
-        private Integer col;
-
-        public Cell(Integer row, Integer col) {
-            this.row = row;
-            this.col = col;
-        }
-
-        public Integer getRow() {
-            return row;
-        }
-
-        public Integer getCol() {
-            return col;
-        }
-    }
+    private static final int BOARD_SIZE = 10;
+    private Cell[][] cells;
 
     // Board constructor
-    //TODO: maybe integrate the createBoard() function into the constructor so it doesn't have to be called.
     public Board() {
+        cells = createCells();
 
     }
 
-    //creates a board 2D array
-    public CellType[][] createBoard() {
-        CellType[][] board = new CellType[10][10];
+    //Getters and Setters
+    public Cell[][] getCells() { return cells; }
+
+    //creates a 2D array of Cells
+    private Cell[][] createCells() {
+        Cell[][] cells = new Cell[BOARD_SIZE][BOARD_SIZE];
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                board[i][j] = CellType.WATER;
+                cells[i][j] = new Cell(i, j, CellType.WATER);
             }
         }
-        return board;
-    }
-
-    //Checks the CellType of a specific cell
-    public CellType checkType(CellType[][] board, Cell cell) {
-        CellType type = board[cell.getRow()][cell.getCol()];
-        return type;
-    }
-
-    //Changes a cell type in the advent of a turn
-    public CellType[][] changeCell(CellType[][] board, CellType type, Cell cell) {
-        board[cell.getRow()][cell.getCol()] = type;
-        return board;
+        return cells;
     }
 
     //Checks to see if there is a SHIP still on the board
-    public Boolean checkShip(CellType[][] board) {
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                if (board[i][j] == CellType.SHIP) {
+    public Boolean checkShip() {
+        for (Cell[] cellRow : cells) {
+            for (Cell cell : cellRow) {
+                if (cell.getType() == CellType.SHIP) {
                     return true;
                 }
             }
@@ -70,23 +38,15 @@ public class Board {
 
     //Used for printing a board for the player's to see. Incorporates a grid system to refer to cells with.
     //TODO: eventually I want to improve the board UI
-    public void printBoard(CellType[][] board) {
+    public void print() {
         String columnNames = "    A  B  C  D  E  F  G  H  I  J";
         //removed for appearance not sure if it is functionally better to do it like this though
         //String[] columnNames = new String[] {" ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
         String[] rowNums = new String[] {" 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 ", "10 "};
-        String[][] boardForPrint = new String[10][10];
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                if (board[i][j] == CellType.WATER) {
-                    boardForPrint[i][j] = "W";
-                } else if (board[i][j] == CellType.HIT) {
-                    boardForPrint[i][j] = "H";
-                } else if (board[i][j] == CellType.MISS) {
-                    boardForPrint[i][j] = "M";
-                } else {
-                    boardForPrint[i][j] = "S";
-                }
+        String[][] boardForPrint = new String[cells.length][cells[0].length];
+        for (Cell[] cellRow : cells) {
+            for (Cell cell: cellRow) {
+                boardForPrint[cell.getRow()][cell.getCol()] = cell.getType().getDisplayValue();
             }
         }
         System.out.println(columnNames);
