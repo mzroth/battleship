@@ -56,7 +56,7 @@ public class Board {
     }
 
     //Checks to see if a ship can be placed. Eventually this will be private but for testing it is public
-    public boolean canPlaceShip(Cell startCell, Integer length, Direction direction) {
+    private boolean canPlaceShip(Cell startCell, Integer length, Direction direction) {
         switch (direction) {
             case HORIZONTAL:
                 if (startCell.getCol() + length > BOARD_SIZE) {
