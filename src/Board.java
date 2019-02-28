@@ -62,7 +62,6 @@ public class Board {
                 if (startCell.getCol() + length > BOARD_SIZE) {
                     return false;
                 } else {
-                    //return true;
                     for (int i = 0; i < length; i++) {
                         if (cells[startCell.getRow()][startCell.getCol() + i].getType() == CellType.SHIP) {
                             return false;
@@ -74,7 +73,6 @@ public class Board {
                 if (startCell.getRow() + length > BOARD_SIZE) {
                     return false;
                 } else {
-                    //return true;
                     for (int i = 0; i < length; i++) {
                         if (cells[startCell.getRow() + i][startCell.getCol()].getType() == CellType.SHIP) {
                             return false;
