@@ -55,21 +55,35 @@ public class Board {
         }
     }
 
-    //Checks to see if a ship can be placed. Eventually this will be private but for testing it is public
+    //Checks to see if a ship can be placed.
     private boolean canPlaceShip(Cell startCell, Integer length, Direction direction) {
         switch (direction) {
             case HORIZONTAL:
                 if (startCell.getCol() + length > BOARD_SIZE) {
                     return false;
                 } else {
-                    return true;
+                    //return true;
+                    for (int i = 0; i < length; i++) {
+                        if (cells[startCell.getRow()][startCell.getCol() + i].getType() == CellType.SHIP) {
+                            return false;
+                        }
+                    }
                 }
-            default:
+                return true;
+            case VERTICAL:
                 if (startCell.getRow() + length > BOARD_SIZE) {
                     return false;
                 } else {
-                    return true;
+                    //return true;
+                    for (int i = 0; i < length; i++) {
+                        if (cells[startCell.getRow() + i][startCell.getCol()].getType() == CellType.SHIP) {
+                            return false;
+                        }
+                    }
                 }
+                return true;
+            default:
+                return false;
         }
     }
 
@@ -85,10 +99,12 @@ public class Board {
                         cells[startCell.getRow()][startCell.getCol() + i].setType(CellType.SHIP);
                     }
                     break;
-                default:
+                case VERTICAL:
                     for (int i = 0; i < length; i++) {
                         cells[startCell.getRow() + i][startCell.getCol()].setType(CellType.SHIP);
                     }
+                    break;
+                default:
                     break;
             }
         }
