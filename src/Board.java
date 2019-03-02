@@ -86,24 +86,24 @@ public class Board {
     }
 
     // Places a ship on the board
-    public void placeShip(Cell startCell, Integer length, Direction direction) {
+    public boolean placeShip(Cell startCell, Integer length, Direction direction) {
         boolean answer = canPlaceShip(startCell, length, direction);
         if (!answer) {
-            System.out.println("You can't place a ship there!");
+            return false;
         } else {
             switch (direction) {
                 case HORIZONTAL:
                     for (int i = 0; i < length; i++) {
                         cells[startCell.getRow()][startCell.getCol() + i].setType(CellType.SHIP);
                     }
-                    break;
+                    return true;
                 case VERTICAL:
                     for (int i = 0; i < length; i++) {
                         cells[startCell.getRow() + i][startCell.getCol()].setType(CellType.SHIP);
                     }
-                    break;
+                    return true;
                 default:
-                    break;
+                    return false;
             }
         }
     }
