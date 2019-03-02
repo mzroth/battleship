@@ -61,6 +61,9 @@ public class Game {
         System.out.println(player.getName() + "'s Board");
         board.print();
         startShip(reader, DESTROYER, "Destroyer", board);
+        clearScreen();
+        System.out.println(player.getName() + "'s Board");
+        board.print();
     }
 
     private void passComputer(Player player, Scanner reader) {
